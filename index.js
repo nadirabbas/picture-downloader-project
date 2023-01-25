@@ -56,8 +56,9 @@ let page;
   const clickNext = async () =>
     await page.evaluate(() => document.querySelector("#OcorPosBtn").click());
 
+  // 600 55400
   await page.goto(
-    "http://memoria.bn.br/DocReader/DocReader.aspx?bib=089842_06&pesq=%22eurico%20nogueira%22&pagfis=55400"
+    "http://memoria.bn.br/DocReader/DocReader.aspx?bib=089842_06&pesq=%22eurico%20nogueira%22&pagfis=27"
   );
 
   await page.waitForSelector("#zoomdiv");
@@ -68,7 +69,7 @@ let page;
 
   let image = await getImageSrc();
 
-  for (let index = 600; index <= 1533; index++) {
+  for (let index = 1; index <= 599; index++) {
     try {
       await waitForSrcChange(image);
       image = await getImageSrc();
