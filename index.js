@@ -22,15 +22,18 @@ let page;
       .map(({ name, value }) => `${name}=${value};`)
       .join(" ");
 
+    imageUrls.push(req.url());
+    const number = imageUrls.length + 1099;
+
     await fetch(req.url(), {
       headers: {
         cookie: rawCookieString,
       },
     }).then((res) => {
-      console.log(`Download started for ` + imageUrls.length);
-      imageUrls.push(req.url());
+      console.log(`Download started for ` + number);
+
       return res.body.pipe(
-        fs.createWriteStream(path.resolve(__dirname, "images/599.jpeg"))
+        fs.createWriteStream(path.resolve(__dirname, `images/${number}.jpeg`))
       );
     });
   });
