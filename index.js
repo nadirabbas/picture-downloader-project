@@ -30,9 +30,7 @@ let page;
       console.log(`Download started for ` + imageUrls.length);
       imageUrls.push(req.url());
       return res.body.pipe(
-        fs.createWriteStream(
-          path.resolve(__dirname, "images/" + imageUrls.length + ".jpeg")
-        )
+        fs.createWriteStream(path.resolve(__dirname, "images/599.jpeg"))
       );
     });
   });
