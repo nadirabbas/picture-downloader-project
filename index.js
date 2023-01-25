@@ -6,7 +6,6 @@ const path = require("path");
 const fetch = require("node-fetch-commonjs");
 
 let page;
-
 (async () => {
   const browser = await puppeteer.launch({
     headless: true,
@@ -23,26 +22,19 @@ let page;
       .map(({ name, value }) => `${name}=${value};`)
       .join(" ");
 
-    const fileStream = fs.createWriteStream(
-      path.resolve(__dirname, `images/${imageUrls.length}.jpeg`)
-    );
-
-    try {
-      await new Promise(async (resolve, rej) => {
-        const res = await fetch(req.url(), {
-          headers: {
-            cookie: rawCookieString,
-          },
-        });
-
-        res.body.pipe(fileStream);
-        res.body.on("error", rej);
-        fileStream.on("finish", resolve);
-      });
-      console.log(`Download complete for ` + imageUrls.length);
-    } catch (err) {
-      console.log("Download failed for " + imageUrls.length);
-    }
+    await fetch(req.url(), {
+      headers: {
+        cookie: rawCookieString,
+      },
+    }).then((res) => {
+      console.log(`Download started for ` + imageUrls.length);
+      imageUrls.push(req.url());
+      return res.body.pipe(
+        fs.createWriteStream(
+          path.resolve(__dirname, "images/" + imageUrls.length + ".jpeg")
+        )
+      );
+    });
   });
 
   const waitForLoaderToHide = async () =>
@@ -52,7 +44,7 @@ let page;
       (oldSrc) =>
         document.querySelector("#DocumentoImg").getAttribute("src") !== oldSrc,
       {
-        timeout: 60000 * 10,
+        timeout: 60 * 1000 * 10,
       },
       image
     );
