@@ -58,7 +58,7 @@ let page;
 
   // 600 55400
   await page.goto(
-    "http://memoria.bn.br/DocReader/DocReader.aspx?bib=089842_06&pesq=%22eurico%20nogueira%22&pagfis=27"
+    "http://memoria.bn.br/DocReader/DocReader.aspx?bib=089842_06&pesq=%22eurico%20nogueira%22&pagfis=55325"
   );
 
   await page.waitForSelector("#zoomdiv");
