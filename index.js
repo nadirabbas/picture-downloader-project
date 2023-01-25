@@ -8,7 +8,7 @@ const fetch = require("node-fetch-commonjs");
 let page;
 (async () => {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
   });
   page = await browser.newPage();
   page.setDefaultTimeout(0);
