@@ -69,7 +69,7 @@ let page;
 
   let image = await getImageSrc();
 
-  for (let index = 1; index <= 599; index++) {
+  for (let index = 1; index <= 700; index++) {
     try {
       await waitForSrcChange(image);
       image = await getImageSrc();
