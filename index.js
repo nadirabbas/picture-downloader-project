@@ -25,6 +25,8 @@ let page;
     imageUrls.push(req.url());
     const number = imageUrls.length + 1099;
 
+    console.log("Fetching", number);
+
     await fetch(req.url(), {
       headers: {
         cookie: rawCookieString,
